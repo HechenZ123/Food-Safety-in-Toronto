@@ -1,6 +1,6 @@
 # STA302_Paper_1
 
-# The past examples don't have an example statement of LLM usage (which is needed to satisfy the second line in the rubric). Here's an example that you'd have in your README:
+The past examples don't have an example statement of LLM usage (which is needed to satisfy the second line in the rubric). Here's an example that you'd have in your README:
 
 **Statement on LLM usage: Aspects of the code were written with the help of the autocomplete tool, Codriver. The abstract and introduction  of paper.qmd were written with the help of ChatHorse and the entire chat history is available in `inputs/llms/usage.txt`**
 
