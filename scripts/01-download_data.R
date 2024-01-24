@@ -23,8 +23,6 @@ packages
 #> # … with 4 more variables: num_resources <int>, formats <chr>,
 #> #   refresh_rate <chr>, last_refreshed <date>
 
-
-
 #### Acquire ####
 # get package
 package <- show_package("ea1d6e57-87af-4e23-b722-6c1f5aa18a8d")
