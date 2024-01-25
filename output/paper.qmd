@@ -1,0 +1,45 @@
+---
+title: "Investigating motor vehicle collisions in Toronto: Installing more red light cameras do not stop traffic accidents from happening"
+author: 
+  - Hechen Zhang
+thanks: "Code and data are available at: https://github.com/Alicia-y/Telling-stories-with-data."
+date: "`r format(Sys.time(), '%d %B %Y')`"
+abstract: "Vehicle collisions occur constantly in Toronto and sometimes could be severe when resulting in damage in public and personal properties, injuries, or even death. This report aims to investigate motor vehicle collisions in Toronto that result in injuries or deaths from 2006 to 2020. By exploring the trend of these traffic collisions in respect of their frequency, fatality, and location, I find that the total number of accidents has a descending trend. However, the number of vehicle collisions that occurred at intersections has not been reduced despite the fact that more red light cameras are installed. This finding suggests that unlike the claimed purpose of this electronic monitor, red light camera doesn't prevent serious traffic accidents from happening at intersection, and furthur measures should be taken to enhance the safety issue on road."
+output:
+  bookdown::pdf_document2
+toc: TRUE
+bibliography: references.bib
+---
+
+# Paper
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Set up libraries
+library(tidyverse)
+library(janitor)
+```
+
+\newpage
+# Introduction
+
+
+# Data
+## Motor Vehicle Collisions involving Killed or Seriously Injured Persons
+
+# Discussion
+
+# Reference
+
+
+
+
+
+
+
+
+
+
+
+
+

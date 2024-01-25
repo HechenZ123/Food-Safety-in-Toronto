@@ -4,10 +4,10 @@ install.packages("knitr")
 
 library(knitr)
 library(janitor)
-library(lubridate)
 library(opendatatoronto)
 library(tidyverse)
 
+dinesafe <- read_csv(here::here("input/data/dinesafe.csv"))
 clean_data <-
   clean_names(dinesafe) |>
   mutate(inspection_date = ymd(inspection_date)) |> 
@@ -15,7 +15,6 @@ clean_data <-
          inspection_date, establishment_status, min_inspections_per_year,
          severity, action)
 dinesafe_clean <- na.omit(clean_data)
-
 head(dinesafe_clean)
 
 write_csv(
