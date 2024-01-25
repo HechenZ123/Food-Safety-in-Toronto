@@ -3,10 +3,10 @@ title: "Analysis of Food Safety Report from 2022 to 2024 in Toronto "
 author: 
   - Hechen Zhang
 thanks: "Code and data are available at: https://github.com/HechenZ123/STA302_Paper_1.git"
-date: "`r format(Sys.time(), '%d %B %Y')`"
+date: "today"
+date-format: "long" 
 abstract: "Food safety issue has a significant impact on people's health. This report aims to investigate the regulations on food safety in Toronto from 2022 to 2024. In this paper, I discuss the comparison between two inspection status, the proportion of various severity of infractions, and I produce the result of the establishment types that are most likely to violate food safety regulations in terms of proportion."
-output:
-  bookdown::pdf_document2
+format: pdf
 toc: TRUE
 bibliography: reference.bib
 ---
@@ -22,6 +22,7 @@ library(kableExtra)
 ```
 
 \newpage
+
 # 1. Introduction
 In recent years, food safety has become an important public health issue. More people have started to pay attention to food safety. The purpose of this paper is to provide an in-depth discussion of food safety data and information, and to analyze the food safety situation in the Toronto area.
 
@@ -39,12 +40,12 @@ food_safety <- read_csv(here::here("input/data/cleaned_dinesafe.csv"))
 
 # Create a table with selected columns
 food_safety <- food_safety %>%
-  select(establishment_name, establishment_address, establishment_status, establishment_type, inspection_date, min_inspections_per_year, severity, action)
+  select(establishment_name, establishment_status, establishment_type, inspection_date, severity, action)
 food_safety %>%
   slice(1:10) %>%
   kable(
-    caption = "Table 1: first ten rows from the cleaned dinesafe data",
-col.names=c("name", "Establishment Address", "Status", "Type", "Date", "Minimum Inspections per Year", "Severity", "Action"),
+    caption = "first ten rows from the cleaned dinesafe data",
+col.names=c("name", "Status", "Type", "Date", "Severity", "Action"),
 linesep = "", digits = 1, booktabs=TRUE) %>%
   kable_styling(latex_options = "HOLD_position", font_size = 10)
 ```
@@ -65,7 +66,7 @@ Figure 1 illustrates the annual count of food safety inspections from 2022 to 20
 
 \newpage
 Next, I would draw a pie chart which offers a clear and immediate understanding of the relative frequencies of each severity level.
-```{r echo=FALSE}
+```{r echo=FALSE, fig.cap="pie chart of Severity"}
 # Prepare the data for plotting
 severity_data <- food_safety %>% 
   filter(!is.na(severity)) %>%  # Remove rows where Severity is NA
@@ -81,7 +82,7 @@ ggplot(severity_data, aes(x = "", y = Count, fill = severity)) +
 ```
 Figure 2 presents a pie chart depicting the proportions of different severity levels of infractions recorded in the dataset. 'M - Minor' is the most common severity level, suggesting that the majority of infractions are of lower risk. In contrast, 'C - Crucial' infractions, representing the most severe category, constitute the smallest percentage of the infractions. Even thought less frequent, their critical nature could have significant implications for food safety. Therefore, in studying food safety, greater attention should be paid to these crucial infractions.
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.cap="the percentage of crucial infractions for each establishment type"}
 # Calculate the percentage of crucial infractions for each establishment type
 percentage_crucial_infractions <- food_safety %>%
   group_by(establishment_type) %>%
@@ -99,10 +100,8 @@ ggplot(percentage_crucial_infractions, aes(x = reorder(establishment_type, Perce
        x = "Establishment Type",
        y = "Percentage of Crucial Infractions")
 ```
-
 Figure 3 highlights the 10 types of establishments with the highest proportion of crucial infractions, indicating potential high-risk areas in terms of food safety. The graph shows that mobile food preparation premises among food establishments are more prone to serious food safety violations, followed by food court vendors and supermarkets. Consequently, mobile food preparation premises represent the highest risk concerning food safety.
-
-```{r echo=FALSE, fig.cap="Comparing enforcement activities based on the infractions noted during a food safety inspection each year from 2022 to 2024", fig.width=8, fig.height=6}
+```{r echo=FALSE, warning=FALSE, fig.cap="Comparing enforcement activities based on the infractions noted during a food safety inspection each year from 2022 to 2024", fig.width=8, fig.height=5}
 # Prepare the data for plotting
 action_data <- food_safety %>%
   mutate(`inspection_date` = as.Date(`inspection_date`, format="%Y-%m-%d"), # Convert to Date format
@@ -115,8 +114,8 @@ action_data <- action_data %>%
 ggplot(mapping = aes(x = date_year, fill=action), data=action_data)+scale_fill_discrete(name = "Enforcement Activities")+ylab("number of 	
 enforcement activities")+theme_light()+geom_bar()
 ```
-
 Figure 4 provides valuable insights into the enforcement activity trends conducted by food safety inspectors from 2022 to 2024. The data indicates an upward trend in the number of enforcement activities from 2022 to 2023, which might suggest a significant number of infractions or a stricter enforcement policy within the food industry. The comparatively lower number of enforcement activities in 2024 is likely attributed to the fact that 2024 has only just begun. The graph shows that the most common actions taken are 'corrected during inspection' and 'notice to comply,' indicating that these are typical responses to infractions found during food safety inspections.
+\newpage 
 
 # 3. Discussion
 Consumer reviews of restaurants on platforms such as Yelp have become the first choice for customers looking for recommendations. While these websites offer insights into the overall dining experience and food quality, they often lack information about food safety. Some researches suggest that official food safety assessments align closely with customers' perceptions of restaurants [@kong2020comparison]. In general, restaurants with higher star ratings tend to pose a lower risk to human health in terms of food safety. Nevertheless, official research and regulations on food safety remains crucial.
